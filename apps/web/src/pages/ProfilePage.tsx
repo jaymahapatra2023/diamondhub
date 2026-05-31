@@ -280,12 +280,12 @@ export function ProfilePage() {
           <p className="text-gray-500 text-sm">No roles assigned yet.</p>
         ) : (
           <div className="space-y-2">
-            {user.roles.map((r) => {
+            {user.roles.map((r, idx) => {
               const meta = ROLE_META[r.role]
               const isActive = activeRole?.role === r.role
               return (
                 <button
-                  key={r.id}
+                  key={`${r.role}-${r.teamId ?? idx}`}
                   type="button"
                   onClick={() => setActiveRole({ role: r.role, teamId: r.teamId })}
                   className={clsx(
