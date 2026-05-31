@@ -53,8 +53,12 @@ export function AppShell() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-950">
-      {/* Top header bar — notification bell on right */}
-      <header className="sticky top-0 z-40 bg-gray-950/90 backdrop-blur-sm border-b border-gray-800/60 h-14 flex items-center justify-end px-3 flex-shrink-0">
+      {/* Top header bar — brand on left, notification bell on right */}
+      <header className="sticky top-0 z-40 bg-gray-950/90 backdrop-blur-sm border-b border-gray-800/60 h-14 flex items-center justify-between px-4 flex-shrink-0">
+        <NavLink to="/" className="flex items-center gap-2" aria-label="DiamondHub home">
+          <span className="text-xl leading-none" aria-hidden="true">⚾</span>
+          <span className="text-lg font-bold text-white tracking-tight">DiamondHub</span>
+        </NavLink>
         <NotificationBell />
       </header>
 
