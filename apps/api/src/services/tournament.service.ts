@@ -321,7 +321,7 @@ export const tournamentService = {
   },
 
   // E2-S6: This Weekend
-  async getThisWeekend(lat: number, lng: number, userId?: string) {
+  async getThisWeekend(lat: number | undefined, lng: number | undefined, userId?: string) {
     // Calculate current weekend (Fri–Sun)
     const now = new Date()
     const day = now.getDay() // 0=Sun, 1=Mon, ..., 5=Fri, 6=Sat
@@ -349,8 +349,7 @@ export const tournamentService = {
 
     return this.search(
       {
-        lat,
-        lng,
+        ...(lat !== undefined && lng !== undefined ? { lat, lng } : {}),
         radiusMiles: 50,
         startDate: friday.toISOString(),
         endDate: sunday.toISOString(),

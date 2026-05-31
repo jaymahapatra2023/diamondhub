@@ -5,8 +5,8 @@ import { tournamentService } from '../../../services/tournament.service.js'
 import { logger } from '../../../lib/logger.js'
 
 const ThisWeekendQuerySchema = z.object({
-  lat: z.coerce.number().min(-90).max(90),
-  lng: z.coerce.number().min(-180).max(180),
+  lat: z.coerce.number().min(-90).max(90).optional(),
+  lng: z.coerce.number().min(-180).max(180).optional(),
 })
 
 export async function thisWeekendHandler(request: FastifyRequest, reply: FastifyReply) {
@@ -15,12 +15,13 @@ export async function thisWeekendHandler(request: FastifyRequest, reply: Fastify
     return reply.code(400).send({
       statusCode: 400,
       error: 'Bad Request',
-      message: 'lat and lng query params are required (numbers)',
+      message: 'Invalid lat/lng params',
       details: parsed.error.flatten(),
     })
   }
 
   const { lat, lng } = parsed.data
+  // lat/lng optional — returns national upcoming weekend events when not provided
   const userId = request.user?.sub
 
   try {
