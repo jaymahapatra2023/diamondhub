@@ -1,0 +1,10 @@
+{
+  "extends": "@diamondhub/config/tsconfig/base",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"]
+}

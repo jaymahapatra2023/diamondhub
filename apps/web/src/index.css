@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+/* Respect OS dark mode */
+@media (prefers-color-scheme: light) {
+  :root { color-scheme: light; }
+}
+
+/* Disable tap highlight on mobile (P1) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-sizing: border-box;
+}
+
+/* P1: All interactive elements min 44px touch target */
+button, a, [role="button"], input[type="submit"], input[type="reset"] {
+  min-height: 44px;
+}
+
+/* Safe area padding for iOS notch */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}

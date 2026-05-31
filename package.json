@@ -1,0 +1,31 @@
+{
+  "name": "diamondhub",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:migrate": "pnpm --filter @diamondhub/db migrate:dev",
+    "db:generate": "pnpm --filter @diamondhub/db generate",
+    "db:studio": "pnpm --filter @diamondhub/db studio",
+    "db:seed": "pnpm --filter @diamondhub/db seed"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@10.30.3",
+  "pnpm": {
+    "overrides": {
+      "ioredis": "5.10.1"
+    }
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

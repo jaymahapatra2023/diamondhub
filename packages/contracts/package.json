@@ -1,0 +1,26 @@
+{
+  "name": "@diamondhub/contracts",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./auth": { "types": "./dist/auth.schemas.d.ts", "default": "./dist/auth.schemas.js" },
+    "./tournament": { "types": "./dist/tournament.schemas.d.ts", "default": "./dist/tournament.schemas.js" },
+    "./team": { "types": "./dist/team.schemas.d.ts", "default": "./dist/team.schemas.js" },
+    "./game": { "types": "./dist/game.schemas.d.ts", "default": "./dist/game.schemas.js" },
+    "./notification": { "types": "./dist/notification.schemas.d.ts", "default": "./dist/notification.schemas.js" },
+    "./schedule": { "types": "./dist/schedule.schemas.d.ts", "default": "./dist/schedule.schemas.js" }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@diamondhub/config": "workspace:*",
+    "typescript": "^5.8.0"
+  }
+}

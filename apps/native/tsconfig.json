@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@diamondhub/contracts": ["../packages/contracts/src/index.ts"],
+      "@/*": ["./*"]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "@diamondhub/config/tsconfig/react",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@diamondhub/contracts": ["../../packages/contracts/src/index.ts"]
+    }
+  },
+  "include": ["src", "*.ts", "*.tsx"]
+}

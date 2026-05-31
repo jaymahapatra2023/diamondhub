@@ -1,0 +1,36 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "430497333009-us-east-1-baf1301e": {
+          "bucketName": "cdk-hnb659fds-assets-430497333009-us-east-1",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::430497333009:role/cdk-hnb659fds-file-publishing-role-430497333009-us-east-1"
+        }
+      }
+    },
+    "74b29a03fe2c4bb092c22b2e5857e317eccf4673000af41b807fde880f14b443": {
+      "displayName": "DiamondHub Template",
+      "source": {
+        "path": "DiamondHub.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "430497333009-us-east-1-cfe78c23": {
+          "bucketName": "cdk-hnb659fds-assets-430497333009-us-east-1",
+          "objectKey": "74b29a03fe2c4bb092c22b2e5857e317eccf4673000af41b807fde880f14b443.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::430497333009:role/cdk-hnb659fds-file-publishing-role-430497333009-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,1269 @@
+{
+ "Description": "DiamondHub — youth travel baseball platform",
+ "Resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/Resource"
+   }
+  },
+  "VpcpublicSubnet1Subnet2BB74ED7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/publicSubnet1"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet1/Subnet"
+   }
+  },
+  "VpcpublicSubnet1RouteTable15C15F8E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/publicSubnet1"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet1/RouteTable"
+   }
+  },
+  "VpcpublicSubnet1RouteTableAssociation4E83B6E4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet1RouteTable15C15F8E"
+    },
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet1Subnet2BB74ED7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcpublicSubnet1DefaultRouteB88F9E93": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet1RouteTable15C15F8E"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet1/DefaultRoute"
+   }
+  },
+  "VpcpublicSubnet2SubnetE34B022A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/publicSubnet2"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet2/Subnet"
+   }
+  },
+  "VpcpublicSubnet2RouteTableC5A6DF77": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/publicSubnet2"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet2/RouteTable"
+   }
+  },
+  "VpcpublicSubnet2RouteTableAssociationCCE257FF": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet2RouteTableC5A6DF77"
+    },
+    "SubnetId": {
+     "Ref": "VpcpublicSubnet2SubnetE34B022A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcpublicSubnet2DefaultRoute732F0BEB": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcpublicSubnet2RouteTableC5A6DF77"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/publicSubnet2/DefaultRoute"
+   }
+  },
+  "VpcisolatedSubnet1SubnetE62B1B9B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/isolatedSubnet1"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet1/Subnet"
+   }
+  },
+  "VpcisolatedSubnet1RouteTableE442650B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/isolatedSubnet1"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet1/RouteTable"
+   }
+  },
+  "VpcisolatedSubnet1RouteTableAssociationD259E31A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcisolatedSubnet1RouteTableE442650B"
+    },
+    "SubnetId": {
+     "Ref": "VpcisolatedSubnet1SubnetE62B1B9B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcisolatedSubnet2Subnet39217055": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "isolated"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/isolatedSubnet2"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet2/Subnet"
+   }
+  },
+  "VpcisolatedSubnet2RouteTable334F9764": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc/isolatedSubnet2"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet2/RouteTable"
+   }
+  },
+  "VpcisolatedSubnet2RouteTableAssociation25A4716F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcisolatedSubnet2RouteTable334F9764"
+    },
+    "SubnetId": {
+     "Ref": "VpcisolatedSubnet2Subnet39217055"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/isolatedSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Vpc"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/IGW"
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Vpc/VPCGW"
+   }
+  },
+  "ApiSg8419ACD7": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "DiamondHub API + Workers",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTP",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTPS",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "SSH",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/ApiSg/Resource"
+   }
+  },
+  "RdsSg7F9F43B6": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "RDS - only reachable from API server",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/RdsSg/Resource"
+   }
+  },
+  "RdsSgfromDiamondHubApiSgDAE47DCC543215E2522A": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Postgres from API SG",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "RdsSg7F9F43B6",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ApiSg8419ACD7",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/RdsSg/from DiamondHubApiSgDAE47DCC:5432"
+   }
+  },
+  "ServerRole6DE95D20": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/ServerRole/Resource"
+   }
+  },
+  "ServerRoleDefaultPolicyA82E260E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "DbSecret685A0FA5"
+       }
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "WebBucket12880F5B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "WebBucket12880F5B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ServerRoleDefaultPolicyA82E260E",
+    "Roles": [
+     {
+      "Ref": "ServerRole6DE95D20"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/ServerRole/DefaultPolicy/Resource"
+   }
+  },
+  "DbSecret685A0FA5": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "DiamondHub RDS credentials",
+    "GenerateSecretString": {
+     "ExcludePunctuation": true,
+     "GenerateStringKey": "password",
+     "PasswordLength": 32,
+     "SecretStringTemplate": "{\"username\":\"diamondhub\"}"
+    },
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/DbSecret/Resource"
+   }
+  },
+  "DbSecretAttachment0609CE05": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "DbSecret685A0FA5"
+    },
+    "TargetId": {
+     "Ref": "Db5D02A0A9"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/DbSecret/Attachment/Resource"
+   }
+  },
+  "ServerInstanceProfileB511E411": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "ServerRole6DE95D20"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Server/InstanceProfile"
+   }
+  },
+  "Server7E7D21FA": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/sda1",
+      "Ebs": {
+       "Encrypted": true,
+       "VolumeSize": 20,
+       "VolumeType": "gp3"
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "ServerInstanceProfileB511E411"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentarm64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t4g.small",
+    "KeyName": "dealer-mgmt-ec2-key",
+    "NetworkInterfaces": [
+     {
+      "AssociatePublicIpAddress": true,
+      "DeviceIndex": "0",
+      "GroupSet": [
+       {
+        "Fn::GetAtt": [
+         "ApiSg8419ACD7",
+         "GroupId"
+        ]
+       }
+      ],
+      "SubnetId": {
+       "Ref": "VpcpublicSubnet1Subnet2BB74ED7"
+      }
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Name",
+      "Value": "DiamondHub/Server"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "ServerRoleDefaultPolicyA82E260E",
+    "ServerRole6DE95D20",
+    "VpcpublicSubnet1DefaultRouteB88F9E93",
+    "VpcpublicSubnet1RouteTableAssociation4E83B6E4",
+    "VpcpublicSubnet2DefaultRoute732F0BEB",
+    "VpcpublicSubnet2RouteTableAssociationCCE257FF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Server/Resource"
+   }
+  },
+  "ServerEip": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/ServerEip"
+   }
+  },
+  "ServerEipAssoc": {
+   "Type": "AWS::EC2::EIPAssociation",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ServerEip",
+      "AllocationId"
+     ]
+    },
+    "InstanceId": {
+     "Ref": "Server7E7D21FA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/ServerEipAssoc"
+   }
+  },
+  "DbSubnetGroup6F6C177A": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for Db database",
+    "SubnetIds": [
+     {
+      "Ref": "VpcisolatedSubnet1SubnetE62B1B9B"
+     },
+     {
+      "Ref": "VpcisolatedSubnet2Subnet39217055"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Db/SubnetGroup/Default"
+   }
+  },
+  "Db5D02A0A9": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "20",
+    "BackupRetentionPeriod": 7,
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t4g.micro",
+    "DBName": "diamondhub",
+    "DBSubnetGroupName": {
+     "Ref": "DbSubnetGroup6F6C177A"
+    },
+    "DeletionProtection": true,
+    "EnablePerformanceInsights": false,
+    "Engine": "postgres",
+    "EngineVersion": "16",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "DbSecret685A0FA5"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MasterUsername": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "DbSecret685A0FA5"
+       },
+       ":SecretString:username::}}"
+      ]
+     ]
+    },
+    "MultiAZ": false,
+    "PubliclyAccessible": false,
+    "StorageEncrypted": true,
+    "StorageType": "gp3",
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ],
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "RdsSg7F9F43B6",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Snapshot",
+   "DeletionPolicy": "Snapshot",
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Db/Resource"
+   }
+  },
+  "WebBucket12880F5B": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/WebBucket/Resource"
+   }
+  },
+  "WebBucketPolicy95D08FAA": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "WebBucket12880F5B"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:PutBucketPolicy"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "WebBucket12880F5B",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "WebBucket12880F5B",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetObject",
+       "Condition": {
+        "StringEquals": {
+         "AWS:SourceArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":cloudfront::",
+            {
+             "Ref": "AWS::AccountId"
+            },
+            ":distribution/",
+            {
+             "Ref": "Cdn9963B1AD"
+            }
+           ]
+          ]
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "WebBucket12880F5B",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/WebBucket/Policy/Resource"
+   }
+  },
+  "WebBucketAutoDeleteObjectsCustomResource9C1A079F": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "WebBucket12880F5B"
+    }
+   },
+   "DependsOn": [
+    "WebBucketPolicy95D08FAA"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/WebBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-430497333009-us-east-1",
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "WebBucket12880F5B"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+    "aws:asset:property": "Code"
+   }
+  },
+  "WebOac39029C1F": {
+   "Type": "AWS::CloudFront::OriginAccessControl",
+   "Properties": {
+    "OriginAccessControlConfig": {
+     "Name": "DiamondHubWebOacAC89FB7D",
+     "OriginAccessControlOriginType": "s3",
+     "SigningBehavior": "no-override",
+     "SigningProtocol": "sigv4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/WebOac/Resource"
+   }
+  },
+  "Cdn9963B1AD": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "CustomErrorResponses": [
+      {
+       "ErrorCachingMinTTL": 0,
+       "ErrorCode": 403,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      },
+      {
+       "ErrorCachingMinTTL": 0,
+       "ErrorCode": 404,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "DiamondHubCdnOrigin1F0D9B399",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "DomainName": {
+        "Fn::GetAtt": [
+         "WebBucket12880F5B",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "DiamondHubCdnOrigin1F0D9B399",
+       "OriginAccessControlId": {
+        "Fn::GetAtt": [
+         "WebOac39029C1F",
+         "Id"
+        ]
+       },
+       "S3OriginConfig": {
+        "OriginAccessIdentity": ""
+       }
+      }
+     ],
+     "PriceClass": "PriceClass_100"
+    },
+    "Tags": [
+     {
+      "Key": "MonthlyCostEstimate",
+      "Value": "approx-29-USD"
+     },
+     {
+      "Key": "Project",
+      "Value": "DiamondHub"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/Cdn/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/5VTTW/bMAz9LctZUYcUxYbe8jEUOdVIil6GYZBlxmNiSwFFpSsM//fSVhK76zBgJz4+0uQjKc/07O6L/vzJvISpLQ7TCnPdbNnYgxLqZwN2ppvno1XLnXvOliqLeYV2G3MH3HED2vjI8GTyCgZ+4OYheIuG0btrssoIT4ZhqLF2DCT4QdgX83puevbmLLJ+1eBYbcFGQn59IB+Pfbt/EmtXEoSg1i6wcRZSqwF/W2dnM5LZKjS1bjY+DdTbzMvwvawBXQpl5HdYQasCWAIOtXGmBJJt9v5ZVIeSeTJUAo+Guib8GWkVFUE3K8MmNwGuytPeriOvFh+IS6qIutXNItpDEpLQ92ZS4290k/vJ+Pzd3SW9DwWdUueR/QoqYHjM92A5TNofKoWGTYz9/6idPpA3x9BN25Vula18LHbkHcsCbx8JS3Rza+WKS+HIV13Dv9ErDEyYx8tLG/ttqzYQfKR09syQqWUkUssY2Nfj2IDfheTIJyyAFnIHJY8FWHSLhrKXE/kY5VrOF6D34eY0u9Nf5d/aB8QpRcdYg94k+wbRcV9PeAMAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "DiamondHub/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentarm64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/canonical/ubuntu/server/22.04/stable/current/arm64/hvm/ebs-gp2/ami-id"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "ServerIp": {
+   "Description": "EC2 Elastic IP — SSH here, also your API host",
+   "Value": {
+    "Ref": "ServerEip"
+   }
+  },
+  "DbEndpoint": {
+   "Description": "RDS hostname — paste into DATABASE_URL in .env",
+   "Value": {
+    "Fn::GetAtt": [
+     "Db5D02A0A9",
+     "Endpoint.Address"
+    ]
+   }
+  },
+  "DbSecretArn": {
+   "Description": "Secrets Manager ARN — setup.sh reads this for the DB password",
+   "Value": {
+    "Ref": "DbSecret685A0FA5"
+   }
+  },
+  "WebBucketName": {
+   "Description": "S3 bucket — pass to deploy-frontend.sh",
+   "Value": {
+    "Ref": "WebBucket12880F5B"
+   }
+  },
+  "CloudFrontDomain": {
+   "Description": "Frontend URL (point CNAME here for custom domain)",
+   "Value": {
+    "Fn::GetAtt": [
+     "Cdn9963B1AD",
+     "DomainName"
+    ]
+   }
+  },
+  "CloudFrontId": {
+   "Description": "CloudFront distribution ID — pass to deploy-frontend.sh",
+   "Value": {
+    "Ref": "Cdn9963B1AD"
+   }
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

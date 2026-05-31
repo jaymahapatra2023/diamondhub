@@ -1,0 +1,63 @@
+{
+  "expo": {
+    "name": "DiamondHub",
+    "slug": "diamondhub",
+    "scheme": "diamondhub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#111827"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.diamondhub",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "DiamondHub uses your location to find nearby tournaments."
+      }
+    },
+    "android": {
+      "package": "app.diamondhub",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1e40af"
+      },
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#3b82f6",
+          "sounds": []
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      },
+      "pushNotifications": {
+        "note": "Configure FCM/APNs keys in EAS dashboard under project credentials.",
+        "androidChannelId": "diamondhub-default",
+        "iosEntitlements": {
+          "aps-environment": "production"
+        }
+      }
+    }
+  }
+}

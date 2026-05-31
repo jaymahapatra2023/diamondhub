@@ -1,0 +1,47 @@
+{
+  "name": "@diamondhub/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false --env-file ../../.env src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest --reporter=verbose",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@diamondhub/contracts": "workspace:*",
+    "@diamondhub/db": "workspace:*",
+    "@diamondhub/workers": "workspace:*",
+    "@fastify/cookie": "^10.0.0",
+    "@fastify/cors": "^10.0.0",
+    "@fastify/helmet": "^13.0.0",
+    "@fastify/rate-limit": "^10.0.0",
+    "@sendgrid/mail": "^8.1.0",
+    "bcrypt": "^5.1.1",
+    "bullmq": "^5.51.0",
+    "fastify": "^5.3.0",
+    "google-auth-library": "^9.15.0",
+    "ioredis": "^5.6.0",
+    "jose": "^5.9.0",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "socket.io": "^4.8.0",
+    "stripe": "^17.7.0",
+    "us-zips": "2022.9.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@diamondhub/config": "workspace:*",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.0.0"
+  }
+}

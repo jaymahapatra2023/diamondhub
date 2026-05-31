@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    platform: linux/amd64
+    container_name: diamondhub-postgres
+    environment:
+      POSTGRES_USER: diamondhub
+      POSTGRES_PASSWORD: diamondhub
+      POSTGRES_DB: diamondhub
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - diamondhub-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U diamondhub']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  diamondhub-network:
+    driver: bridge

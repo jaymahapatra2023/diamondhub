@@ -1,0 +1,938 @@
+// DiamondHub — Complete Prisma Schema
+// Covers all 15 epics. PostgreSQL 16 + PostGIS.
+// Principles: P5 (PostgreSQL source of truth), P7 (PostGIS for geo), P8 (security)
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum Role {
+  COACH
+  PARENT
+  PLAYER
+  GUEST
+
+  @@map("role")
+}
+
+enum TeamMemberRole {
+  HEAD_COACH
+  ASSISTANT_COACH
+  PLAYER
+  PARENT
+
+  @@map("team_member_role")
+}
+
+enum Sport {
+  BASEBALL
+  SOFTBALL
+  BOTH
+
+  @@map("sport")
+}
+
+enum Organizer {
+  PERFECT_GAME
+  USSSA
+  USA_BASEBALL
+  TOP_GUN
+  SWAT
+  IMPACT
+  TRIPLE_CROWN
+  TBS
+  OTHER
+
+  @@map("organizer")
+}
+
+enum TournamentFormat {
+  POOL_BRACKET
+  DOUBLE_ELIM
+  ROUND_ROBIN
+  SINGLE_ELIM
+
+  @@map("tournament_format")
+}
+
+enum Surface {
+  TURF
+  GRASS
+  MIXED
+
+  @@map("surface")
+}
+
+enum TournamentStatus {
+  UPCOMING
+  OPEN
+  WAITLIST
+  CLOSED
+  ONGOING
+  COMPLETED
+  CANCELLED
+
+  @@map("tournament_status")
+}
+
+enum DataSource {
+  MANUAL
+  SCRAPED
+  PARTNER
+  COMMUNITY
+
+  @@map("data_source")
+}
+
+enum RegistrationStatus {
+  PENDING_PAYMENT
+  CONFIRMED
+  WAITLISTED
+  WITHDRAWN
+  REJECTED
+
+  @@map("registration_status")
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+  DISPUTED
+
+  @@map("payment_status")
+}
+
+enum EventType {
+  PRACTICE
+  GAME
+  MEETING
+  OTHER
+  TOURNAMENT
+
+  @@map("event_type")
+}
+
+enum RsvpStatus {
+  YES
+  NO
+  MAYBE
+
+  @@map("rsvp_status")
+}
+
+enum GameStatus {
+  SCHEDULED
+  DELAYED
+  LIVE
+  FINAL
+  CANCELLED
+
+  @@map("game_status")
+}
+
+enum InningHalf {
+  TOP
+  BOTTOM
+
+  @@map("inning_half")
+}
+
+enum Platform {
+  IOS
+  ANDROID
+  WEB
+
+  @@map("platform")
+}
+
+enum OAuthProvider {
+  GOOGLE
+  APPLE
+
+  @@map("oauth_provider")
+}
+
+enum DocumentType {
+  BIRTH_CERT
+  MEDICAL_RELEASE
+  WAIVER
+  OTHER
+
+  @@map("document_type")
+}
+
+enum Bats {
+  RIGHT
+  LEFT
+  SWITCH
+
+  @@map("bats")
+}
+
+enum Throws {
+  RIGHT
+  LEFT
+
+  @@map("throws_hand")
+}
+
+enum MessageThreadType {
+  TEAM
+  DIRECT
+
+  @@map("message_thread_type")
+}
+
+enum ConflictType {
+  PLAYER
+  COACH
+
+  @@map("conflict_type")
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  COACH
+
+  @@map("org_role")
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+
+  @@map("member_status")
+}
+
+enum LinkStatus {
+  PENDING
+  APPROVED
+  REJECTED
+
+  @@map("link_status")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E1 · AUTHENTICATION & IDENTITY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  emailVerified Boolean  @default(false) @map("email_verified")
+  passwordHash  String?  @map("password_hash")
+  name          String
+  phone         String?
+  avatarUrl     String?  @map("avatar_url")
+  timezone      String   @default("America/New_York")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  roles                  UserRole[]
+  authTokens             AuthToken[]
+  passwordResetTokens    PasswordResetToken[]
+  emailVerificationTokens EmailVerificationToken[]
+  oauthAccounts          OAuthAccount[]
+  auditLogs              AuditLog[]
+  deviceTokens           DeviceToken[]
+  notifications          Notification[]
+  notificationPrefs      UserNotificationPreference?
+  searchPreferences      UserSearchPreference?
+  teamMemberships        TeamMember[]
+  teamInvitesCreated     TeamInvite[]           @relation("InviteCreator")
+  parentLinks            ParentPlayerLink[]     @relation("ParentUser")
+  playerLinks            ParentPlayerLink[]     @relation("PlayerUser")
+  rsvps                  EventRsvp[]
+  sentMessages           Message[]
+  announcementsAuthored  Announcement[]
+  scheduleEventsCreated  ScheduleEvent[]        @relation("EventCreator")
+  eventCancellations     ScheduleEvent[]        @relation("EventCancelledBy")
+  tournamentBookmarks    TournamentBookmark[]
+  tournamentFollowers    TournamentFollower[]
+  playersOwned           Player[]
+  orgMemberships         OrganizationMember[]
+  conflictsDetected      ConflictRecord[]
+
+  @@map("users")
+}
+
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  role      Role
+  teamId    String?  @map("team_id")
+  isPrimary Boolean  @default(false) @map("is_primary")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team? @relation(fields: [teamId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, role, teamId])
+  @@index([userId])
+  @@map("user_roles")
+}
+
+model AuthToken {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  tokenHash   String    @unique @map("token_hash")
+  expiresAt   DateTime  @map("expires_at")
+  deviceInfo  String?   @map("device_info")
+  lastUsedAt  DateTime? @map("last_used_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("auth_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("email_verification_tokens")
+}
+
+model OAuthAccount {
+  id                String        @id @default(uuid())
+  userId            String        @map("user_id")
+  provider          OAuthProvider
+  providerAccountId String        @map("provider_account_id")
+  email             String?
+  createdAt         DateTime      @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("oauth_accounts")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  action     String
+  resource   String
+  resourceId String?  @map("resource_id")
+  roleUsed   String?  @map("role_used")
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([resource, resourceId])
+  @@map("audit_logs")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E3 · TEAM MANAGEMENT
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Team {
+  id            String   @id @default(uuid())
+  name          String
+  sport         Sport
+  ageDivision   String   @map("age_division")
+  seasonYear    Int      @map("season_year")
+  coachId       String   @map("coach_id")
+  photoUrl      String?  @map("photo_url")
+  homeFieldName String?  @map("home_field_name")
+  homeFieldCity String?  @map("home_field_city")
+  inviteCode    String   @unique @map("invite_code")
+  isActive      Boolean  @default(true) @map("is_active")
+  orgId         String?  @map("org_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  members               TeamMember[]
+  invites               TeamInvite[]
+  userRoles             UserRole[]
+  registrations         TournamentRegistration[]
+  scheduleEvents        ScheduleEvent[]
+  homeGames             Game[]                   @relation("HomeTeam")
+  awayGames             Game[]                   @relation("AwayTeam")
+  messages              Message[]
+  announcements         Announcement[]
+  players               Player[]
+  orgTeam               OrganizationTeam?
+  parentPlayerLinks     ParentPlayerLink[]
+
+  @@index([coachId])
+  @@index([inviteCode])
+  @@map("teams")
+}
+
+model TeamMember {
+  id           String         @id @default(uuid())
+  teamId       String         @map("team_id")
+  userId       String         @map("user_id")
+  role         TeamMemberRole
+  jerseyNumber Int?           @map("jersey_number")
+  positions    String[]
+  status       MemberStatus   @default(ACTIVE)
+  joinedAt     DateTime       @default(now()) @map("joined_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+  @@index([teamId])
+  @@index([userId])
+  @@map("team_members")
+}
+
+model TeamInvite {
+  id             String         @id @default(uuid())
+  teamId         String         @map("team_id")
+  email          String?
+  role           TeamMemberRole
+  token          String         @unique
+  targetPlayerId String?        @map("target_player_id")
+  expiresAt      DateTime       @map("expires_at")
+  usedAt         DateTime?      @map("used_at")
+  createdBy      String         @map("created_by")
+  createdAt      DateTime       @default(now()) @map("created_at")
+
+  team    Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  creator User @relation("InviteCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
+  @@index([token])
+  @@map("team_invites")
+}
+
+model ParentPlayerLink {
+  id           String     @id @default(uuid())
+  parentUserId String     @map("parent_user_id")
+  playerUserId String     @map("player_user_id")
+  teamId       String     @map("team_id")
+  status       LinkStatus @default(PENDING)
+  requestedAt  DateTime   @default(now()) @map("requested_at")
+  approvedAt   DateTime?  @map("approved_at")
+  approvedBy   String?    @map("approved_by")
+
+  parent User @relation("ParentUser", fields: [parentUserId], references: [id], onDelete: Cascade)
+  player User @relation("PlayerUser", fields: [playerUserId], references: [id], onDelete: Cascade)
+  team   Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([parentUserId, playerUserId, teamId])
+  @@index([parentUserId])
+  @@index([playerUserId])
+  @@map("parent_player_links")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E2 · TOURNAMENT DISCOVERY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Tournament {
+  id                   String           @id @default(uuid())
+  name                 String
+  organizer            Organizer
+  sport                Sport
+  ageDivisions         String[]         @map("age_divisions")
+  format               TournamentFormat
+  startDate            DateTime         @map("start_date")
+  endDate              DateTime         @map("end_date")
+  registrationDeadline DateTime?        @map("registration_deadline")
+  locationName         String           @map("location_name")
+  address              String
+  city                 String
+  state                String
+  zip                  String
+  lat                  Decimal          @db.Decimal(10, 7)
+  lng                  Decimal          @db.Decimal(10, 7)
+  entryFee             Decimal          @default(0) @map("entry_fee") @db.Decimal(10, 2)
+  maxTeams             Int?             @map("max_teams")
+  currentTeams         Int              @default(0) @map("current_teams")
+  fieldsCount          Int              @default(1) @map("fields_count")
+  surface              Surface          @default(GRASS)
+  hotelDealUrl         String?          @map("hotel_deal_url")
+  registrationUrl      String?          @map("registration_url")
+  umpireInfo           String?          @map("umpire_info")
+  notes                String?
+  status               TournamentStatus @default(UPCOMING)
+  dataSource           DataSource       @default(MANUAL) @map("data_source")
+  sourceUrl            String?          @map("source_url")
+  scrapedAt            DateTime?        @map("scraped_at")
+  isPublished          Boolean          @default(false) @map("is_published")
+  createdAt            DateTime         @default(now()) @map("created_at")
+  updatedAt            DateTime         @updatedAt @map("updated_at")
+
+  registrations TournamentRegistration[]
+  bookmarks     TournamentBookmark[]
+  followers     TournamentFollower[]
+  games         Game[]
+
+  @@index([startDate, endDate])
+  @@index([status])
+  @@index([organizer])
+  @@index([sport])
+  @@map("tournaments")
+}
+
+model TournamentBookmark {
+  userId       String   @map("user_id")
+  tournamentId String   @map("tournament_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tournament Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tournamentId])
+  @@map("tournament_bookmarks")
+}
+
+model TournamentFollower {
+  id           String   @id @default(uuid())
+  tournamentId String   @map("tournament_id")
+  userId       String?  @map("user_id")
+  guestToken   String?  @map("guest_token")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  user       User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tournamentId])
+  @@index([guestToken])
+  @@map("tournament_followers")
+}
+
+model UserSearchPreference {
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  sport         Sport?
+  ageDivisions  String[] @map("age_divisions")
+  organizers    String[]
+  radiusMiles   Int      @default(50) @map("radius_miles")
+  entryFeeMin   Decimal? @map("entry_fee_min") @db.Decimal(10, 2)
+  entryFeeMax   Decimal? @map("entry_fee_max") @db.Decimal(10, 2)
+  savedSearches Json     @default("[]") @map("saved_searches")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_search_preferences")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E7 · TOURNAMENT REGISTRATION & PAYMENTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model TournamentRegistration {
+  id                   String             @id @default(uuid())
+  tournamentId         String             @map("tournament_id")
+  teamId               String             @map("team_id")
+  division             String
+  status               RegistrationStatus @default(PENDING_PAYMENT)
+  waitlistPosition     Int?               @map("waitlist_position")
+  paymentStatus        PaymentStatus      @default(UNPAID) @map("payment_status")
+  stripePaymentIntentId String?           @map("stripe_payment_intent_id")
+  stripeCustomerId     String?            @map("stripe_customer_id")
+  entryFeePaid         Decimal            @default(0) @map("entry_fee_paid") @db.Decimal(10, 2)
+  rosterLocked         Boolean            @default(false) @map("roster_locked")
+  rosterLockedAt       DateTime?          @map("roster_locked_at")
+  registeredAt         DateTime           @default(now()) @map("registered_at")
+  confirmedAt          DateTime?          @map("confirmed_at")
+  notes                String?
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  team       Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([tournamentId, teamId])
+  @@index([teamId])
+  @@index([paymentStatus])
+  @@index([stripePaymentIntentId])
+  @@map("tournament_registrations")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E4 · SCHEDULE & CALENDAR
+// ─────────────────────────────────────────────────────────────────────────────
+
+model ScheduleEvent {
+  id                       String    @id @default(uuid())
+  teamId                   String    @map("team_id")
+  tournamentRegistrationId String?   @map("tournament_registration_id")
+  type                     EventType
+  title                    String
+  locationName             String?   @map("location_name")
+  locationAddress          String?   @map("location_address")
+  lat                      Decimal?  @db.Decimal(10, 7)
+  lng                      Decimal?  @db.Decimal(10, 7)
+  startTime                DateTime  @map("start_time")
+  endTime                  DateTime  @map("end_time")
+  notes                    String?
+  isCancelled              Boolean   @default(false) @map("is_cancelled")
+  cancelledAt              DateTime? @map("cancelled_at")
+  cancelledBy              String?   @map("cancelled_by")
+  sendNotification         Boolean   @default(true) @map("send_notification")
+  createdBy                String    @map("created_by")
+  createdAt                DateTime  @default(now()) @map("created_at")
+  updatedAt                DateTime  @updatedAt @map("updated_at")
+
+  team      Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  creator   User      @relation("EventCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  cancelledByUser User? @relation("EventCancelledBy", fields: [cancelledBy], references: [id])
+  rsvps     EventRsvp[]
+  conflicts ConflictRecord[] @relation("ConflictEventA")
+  conflictsB ConflictRecord[] @relation("ConflictEventB")
+
+  @@index([teamId, startTime])
+  @@index([startTime])
+  @@map("schedule_events")
+}
+
+model EventRsvp {
+  id          String     @id @default(uuid())
+  eventId     String     @map("event_id")
+  userId      String     @map("user_id")
+  playerId    String?    @map("player_id")
+  status      RsvpStatus
+  note        String?
+  respondedAt DateTime   @default(now()) @map("responded_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  event  ScheduleEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  player Player?       @relation(fields: [playerId], references: [id])
+
+  @@unique([eventId, userId])
+  @@index([eventId])
+  @@map("event_rsvps")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E9 · LIVE SCORING & BRACKETS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Game {
+  id              String     @id @default(uuid())
+  tournamentId    String     @map("tournament_id")
+  homeTeamId      String     @map("home_team_id")
+  awayTeamId      String     @map("away_team_id")
+  field           String?
+  round           String?
+  pool            String?
+  gameNumber      Int?       @map("game_number")
+  scheduledTime   DateTime   @map("scheduled_time")
+  actualStartTime DateTime?  @map("actual_start_time")
+  scoreHome       Int        @default(0) @map("score_home")
+  scoreAway       Int        @default(0) @map("score_away")
+  inning          Int        @default(1)
+  half            InningHalf @default(TOP)
+  status          GameStatus @default(SCHEDULED)
+  winnerId        String?    @map("winner_id")
+  inningsDetail   Json       @default("[]") @map("innings_detail")
+  scorekeeperId   String?    @map("scorekeeper_id")
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+
+  tournament Tournament    @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  homeTeam   Team          @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeam   Team          @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  playerStats PlayerGameStat[]
+
+  @@index([tournamentId, homeTeamId])
+  @@index([tournamentId, awayTeamId])
+  @@index([scheduledTime])
+  @@index([status])
+  @@map("games")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E5 · NOTIFICATIONS & ALERTS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Notification {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  type         String
+  title        String
+  body         String
+  data         Json     @default("{}")
+  isRead       Boolean  @default(false) @map("is_read")
+  channelsSent String[] @map("channels_sent")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@index([userId, createdAt])
+  @@map("notifications")
+}
+
+model UserNotificationPreference {
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id")
+  preferences Json     @default("{}")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_notification_preferences")
+}
+
+model DeviceToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  platform  Platform
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, platform])
+  @@map("device_tokens")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E10 · COMMUNICATION & MESSAGING
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Message {
+  id            String            @id @default(uuid())
+  teamId        String            @map("team_id")
+  threadType    MessageThreadType @map("thread_type")
+  senderId      String            @map("sender_id")
+  recipientId   String?           @map("recipient_id")
+  body          String
+  attachmentUrl String?           @map("attachment_url")
+  isDeleted     Boolean           @default(false) @map("is_deleted")
+  deletedAt     DateTime?         @map("deleted_at")
+  createdAt     DateTime          @default(now()) @map("created_at")
+
+  team         Team                 @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  sender       User                 @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  readReceipts MessageReadReceipt[]
+
+  @@index([teamId, createdAt])
+  @@index([senderId])
+  @@map("messages")
+}
+
+model MessageReadReceipt {
+  messageId String   @map("message_id")
+  userId    String   @map("user_id")
+  readAt    DateTime @default(now()) @map("read_at")
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@id([messageId, userId])
+  @@map("message_read_receipts")
+}
+
+model Announcement {
+  id        String   @id @default(uuid())
+  teamId    String   @map("team_id")
+  authorId  String   @map("author_id")
+  title     String
+  body      String
+  isPinned  Boolean  @default(false) @map("is_pinned")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  team   Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([teamId, createdAt])
+  @@map("announcements")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E11 · PLAYER PROFILES & STATS
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Player {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  teamId          String   @map("team_id")
+  dateOfBirth     DateTime? @map("date_of_birth")
+  positions       String[]
+  bats            Bats?
+  throws          Throws?
+  gradYear        Int?     @map("grad_year")
+  heightIn        Int?     @map("height_in")
+  weightLbs       Int?     @map("weight_lbs")
+  isPublicProfile Boolean  @default(false) @map("is_public_profile")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team         Team             @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  documents    PlayerDocument[]
+  emergencyContact EmergencyContact?
+  gameStats    PlayerGameStat[]
+  rsvps        EventRsvp[]
+
+  @@index([userId])
+  @@index([teamId])
+  @@map("players")
+}
+
+model PlayerDocument {
+  id         String       @id @default(uuid())
+  playerId   String       @map("player_id")
+  type       DocumentType
+  s3Key      String       @map("s3_key")
+  fileName   String       @map("file_name")
+  mimeType   String       @map("mime_type")
+  sizeBytes  Int          @map("size_bytes")
+  isVerified Boolean      @default(false) @map("is_verified")
+  verifiedAt DateTime?    @map("verified_at")
+  verifiedBy String?      @map("verified_by")
+  uploadedAt DateTime     @default(now()) @map("uploaded_at")
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@index([playerId])
+  @@map("player_documents")
+}
+
+model EmergencyContact {
+  id          String   @id @default(uuid())
+  playerId    String   @unique @map("player_id")
+  contactName String   @map("contact_name")
+  relationship String
+  phone1      String
+  phone2      String?
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("emergency_contacts")
+}
+
+model PlayerGameStat {
+  id             String   @id @default(uuid())
+  gameId         String   @map("game_id")
+  playerId       String   @map("player_id")
+  atBats         Int      @default(0) @map("at_bats")
+  hits           Int      @default(0)
+  doubles        Int      @default(0)
+  triples        Int      @default(0)
+  homeRuns       Int      @default(0) @map("home_runs")
+  rbi            Int      @default(0)
+  walks          Int      @default(0)
+  strikeouts     Int      @default(0)
+  inningsPitched Decimal  @default(0) @map("innings_pitched") @db.Decimal(5, 1)
+  earnedRuns     Int      @default(0) @map("earned_runs")
+  pitchingWin    Boolean? @map("pitching_win")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, playerId])
+  @@index([playerId])
+  @@map("player_game_stats")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E8 · CONFLICT DETECTION
+// ─────────────────────────────────────────────────────────────────────────────
+
+model ConflictRecord {
+  id               String       @id @default(uuid())
+  userId           String       @map("user_id")
+  eventAId         String       @map("event_a_id")
+  eventBId         String       @map("event_b_id")
+  conflictType     ConflictType @map("conflict_type")
+  playersAffected  String[]     @map("players_affected")
+  detectedAt       DateTime     @default(now()) @map("detected_at")
+  resolvedAt       DateTime?    @map("resolved_at")
+  resolvedBy       String?      @map("resolved_by")
+
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventA ScheduleEvent @relation("ConflictEventA", fields: [eventAId], references: [id], onDelete: Cascade)
+  eventB ScheduleEvent @relation("ConflictEventB", fields: [eventBId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("conflict_records")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// E15 · ORGANIZATION / CLUB ADMIN
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Organization {
+  id               String   @id @default(uuid())
+  name             String
+  ownerUserId      String   @map("owner_user_id")
+  logoUrl          String?  @map("logo_url")
+  stripeCustomerId String?  @map("stripe_customer_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  members OrganizationMember[]
+  teams   OrganizationTeam[]
+
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id       String   @id @default(uuid())
+  orgId    String   @map("org_id")
+  userId   String   @map("user_id")
+  role     OrgRole
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  user User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, userId])
+  @@map("organization_members")
+}
+
+model OrganizationTeam {
+  orgId  String @map("org_id")
+  teamId String @unique @map("team_id")
+
+  org  Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  team Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@id([orgId, teamId])
+  @@map("organization_teams")
+}

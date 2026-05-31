@@ -1,0 +1,718 @@
+{
+  "/DiamondHub": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "MonthlyCostEstimate",
+          "value": "approx-29-USD"
+        },
+        {
+          "key": "Project",
+          "value": "DiamondHub"
+        }
+      ]
+    }
+  ],
+  "/DiamondHub/SsmParameterValue:--aws--service--canonical--ubuntu--server--22.04--stable--current--arm64--hvm--ebs-gp2--ami-id:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmParameterValueawsservicecanonicalubuntuserver2204stablecurrentarm64hvmebsgp2amiidC96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:80:20)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DiamondHub/ServerEip": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerEip"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:103:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/ServerEipAssoc": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerEipAssoc"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:104:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/DiamondHub/ServerIp": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerIp"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:176:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/DbEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbEndpoint"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:180:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/DbSecretArn": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbSecretArn"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:184:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/WebBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:188:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/CloudFrontDomain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CloudFrontDomain"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:192:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/CloudFrontId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CloudFrontId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:196:5)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DiamondHub/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Vpc8378EB38"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:25:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcIGWD7BA715C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:25:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcVPCGWBF912B6E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:25:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/ApiSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiSg8419ACD7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:35:19)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/RdsSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSg7F9F43B6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:48:19)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/RdsSg/from DiamondHubApiSgDAE47DCC:5432": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RdsSgfromDiamondHubApiSgDAE47DCC543215E2522A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:53:11)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/ServerRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerRole6DE95D20"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:56:24)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/DbSecret/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbSecret685A0FA5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:65:22)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Server/InstanceProfile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerInstanceProfileB511E411"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:80:20)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Server/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Server7E7D21FA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:80:20)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Db/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Db5D02A0A9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:112:16)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/WebBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucket12880F5B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:132:23)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DiamondHub/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DiamondHub/WebOac/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebOac39029C1F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new S3OriginAccessControl2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:143:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Cdn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Cdn9963B1AD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:147:26)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1Subnet2BB74ED7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1RouteTable15C15F8E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1RouteTableAssociation4E83B6E4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1DefaultRouteB88F9E93"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:25:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2SubnetE34B022A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2RouteTableC5A6DF77"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2RouteTableAssociationCCE257FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/publicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2DefaultRoute732F0BEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:25:17)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet1SubnetE62B1B9B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet1RouteTableE442650B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet1RouteTableAssociationD259E31A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet2Subnet39217055"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet2RouteTable334F9764"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/Vpc/isolatedSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcisolatedSubnet2RouteTableAssociation25A4716F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:262 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/DiamondHub/ServerRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServerRoleDefaultPolicyA82E260E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.grantRead in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:75:14)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)"
+      ]
+    }
+  ],
+  "/DiamondHub/DbSecret/Attachment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbSecretAttachment0609CE05"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:112:16)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/Db/SubnetGroup/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DbSubnetGroup6F6C177A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseInstance2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:112:16)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DiamondHub/WebBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucketPolicy95D08FAA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new DiamondHubStack (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/lib/diamondhub-stack.ts:132:23)",
+        "<anonymous> (/Users/jaymahapatra/Desktop/travel-baseball/infra/cdk/bin/app.ts:13:1)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/DiamondHub/WebBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "WebBucketAutoDeleteObjectsCustomResource9C1A079F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}
