@@ -84,6 +84,8 @@ const SAMPLE_TOURNAMENT = {
   status: 'OPEN' as const,
   lat: 36.16,
   lng: -86.78,
+  dataSource: 'SCRAPED' as const,
+  registrationUrl: null,
 }
 
 function makeQueryClient() {

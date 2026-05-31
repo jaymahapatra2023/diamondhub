@@ -87,7 +87,7 @@ export const tournamentService = {
       values.push(new Date(params.endDate))
     }
     if (params.sport) {
-      whereParts.push(`t.sport = $${paramIdx++}`)
+      whereParts.push(`t.sport = $${paramIdx++}::sport`)
       values.push(params.sport)
     }
     if (params.ageDivisions && params.ageDivisions.length > 0) {

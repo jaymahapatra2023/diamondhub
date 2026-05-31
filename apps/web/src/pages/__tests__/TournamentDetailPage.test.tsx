@@ -60,6 +60,8 @@ const SAMPLE_TOURNAMENT: TournamentDetail = {
   lng: -86.78,
   isBookmarked: false,
   isFollowing: false,
+  dataSource: 'SCRAPED' as const,
+  sourceUrl: null,
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

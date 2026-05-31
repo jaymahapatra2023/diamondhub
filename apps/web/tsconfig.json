@@ -8,5 +8,6 @@
       "@diamondhub/contracts": ["../../packages/contracts/src/index.ts"]
     }
   },
-  "include": ["src", "*.ts", "*.tsx"]
+  "include": ["src", "*.ts", "*.tsx"],
+  "exclude": ["src/**/*.test.tsx", "src/**/*.test.ts", "src/**/__tests__/**"]
 }
