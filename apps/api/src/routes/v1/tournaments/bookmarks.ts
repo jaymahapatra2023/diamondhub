@@ -8,7 +8,7 @@ export async function bookmarksListHandler(request: FastifyRequest, reply: Fasti
 
   try {
     const bookmarks = await tournamentService.getBookmarks(userId)
-    return reply.code(200).send({ bookmarks, total: bookmarks.length })
+    return reply.code(200).send({ tournaments: bookmarks, total: bookmarks.length })
   } catch (err) {
     logger.error({ err, userId }, 'Failed to fetch bookmarks')
     return reply.code(500).send({
