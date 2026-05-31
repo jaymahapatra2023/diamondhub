@@ -17,7 +17,9 @@ const SENSITIVE_RATE_LIMIT = process.env['NODE_ENV'] === 'test'
   : {
       config: {
         rateLimit: {
-          max: 5,
+          // 20/min per IP — blocks brute force (needs thousands of tries) while
+          // tolerating shared-IP scenarios (corporate NAT, families, retries).
+          max: 20,
           timeWindow: '1 minute',
         },
       },
