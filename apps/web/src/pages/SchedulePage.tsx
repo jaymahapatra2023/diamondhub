@@ -275,6 +275,7 @@ export function SchedulePage() {
     <div className="flex flex-col h-full bg-gray-950 text-white">
       {/* ── Top bar ── */}
       <div className="flex-shrink-0 px-4 pt-4 pb-2 space-y-3">
+        <h1 className="text-xl font-bold text-white">Schedule</h1>
         {/* View toggle */}
         <div className="flex items-center gap-1 bg-gray-800 rounded-xl p-1" role="tablist" aria-label="Calendar view">
           {(['month', 'week', 'day'] as ViewMode[]).map((v) => (

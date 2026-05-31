@@ -40,8 +40,7 @@ test.describe('Public / Unauthenticated', () => {
   test('protected route gated when unauthenticated', async ({ page }) => {
     await goto(page, '/teams')
     // Guest sees landing/login gateway — never the authenticated team dashboard
-    await expect(page.locator('a[href="/login"]:has-text("Sign In"), text=/Sign In/i').first())
-      .toBeVisible({ timeout: 10000 })
+    await expect(page.getByText(/Sign In/i).first()).toBeVisible({ timeout: 10000 })
     await expect(page.locator('text=Thunder Hawks')).toHaveCount(0)
   })
 
