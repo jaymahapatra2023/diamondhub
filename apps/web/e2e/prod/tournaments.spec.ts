@@ -25,9 +25,8 @@ test.describe('Tournament Discovery', () => {
   test('ZIP search returns cards', async ({ coachPage: page }) => {
     const errors = trackErrors(page)
     await searchZip(page, '27310')
-    // distance label "NN mi" or org name appears on cards
-    const cards = page.locator('text=/\\d+\\s*mi\\b/, text=/USSSA|BASEBALL|SOFTBALL/')
-    expect(await cards.count()).toBeGreaterThan(0)
+    // Card shows a distance badge like "38 mi"; assert at least one renders
+    await expect(page.getByText(/\d+\s*mi\b/).first()).toBeVisible({ timeout: 8000 })
     assertNoJsErrors(errors, 'ZIP search')
   })
 

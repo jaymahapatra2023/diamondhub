@@ -83,9 +83,15 @@ export function TournamentsPage() {
   const debouncedSearch = useDebounce(searchInput, 300)
   const queryClient = useQueryClient()
 
-  // Derive query params from filters + location
+  // Derive query params from filters + location.
+  // ZIP searches carry a `zip` (API geocodes server-side); geolocation carries lat/lng.
+  const locationParam = searchLocation
+    ? (searchLocation.zip
+        ? { zip: searchLocation.zip }
+        : { lat: searchLocation.lat, lng: searchLocation.lng })
+    : {}
   const queryParams = {
-    ...(searchLocation ? { lat: searchLocation.lat, lng: searchLocation.lng } : {}),
+    ...locationParam,
     radiusMiles: filters.radiusMiles,
     ...(filters.sport ? { sport: filters.sport } : {}),
     ...(filters.ageDivisions.length ? { ageDivisions: filters.ageDivisions } : {}),
@@ -163,7 +169,7 @@ export function TournamentsPage() {
     if (!isZip && !isCity) return
     // For ZIP we pass it directly; city search would need geocoding (future)
     if (isZip) {
-      setSearchLocation({ lat: 0, lng: 0, label: trimmed })
+      setSearchLocation({ lat: 0, lng: 0, label: trimmed, zip: trimmed })
     }
   }, [debouncedSearch, setSearchLocation])
 

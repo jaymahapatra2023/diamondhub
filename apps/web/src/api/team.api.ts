@@ -16,9 +16,33 @@ export const teamApi = {
   getTeam: (teamId: string) =>
     apiClient.get<TeamResponse>(`/teams/${teamId}`).then((r) => r.data),
 
-  // Roster
+  // Roster — API returns team members ({memberId, name, ...}); map to the
+  // PlayerResponse shape the UI expects ({id, firstName, lastName, ...}).
   getRoster: (teamId: string) =>
-    apiClient.get<any[]>(`/teams/${teamId}/roster`).then((r) => r.data),
+    apiClient.get<any[]>(`/teams/${teamId}/roster`).then((r) =>
+      (r.data ?? []).map((m: any) => {
+        const parts = String(m.name ?? '').trim().split(/\s+/)
+        const firstName = parts[0] ?? ''
+        const lastName = parts.slice(1).join(' ')
+        return {
+          id: m.memberId ?? m.id ?? m.userId,
+          userId: m.userId,
+          teamId,
+          name: m.name ?? `${firstName} ${lastName}`.trim(),
+          firstName,
+          lastName,
+          jerseyNumber: m.jerseyNumber ?? null,
+          positions: m.positions ?? [],
+          dateOfBirth: m.dateOfBirth ?? null,
+          bats: m.bats ?? null,
+          throws: m.throws ?? null,
+          status: m.status ?? 'ACTIVE',
+          hasEmergencyContact: m.hasEmergencyContact ?? false,
+          documentsCount: m.documentsCount ?? 0,
+          role: m.role,
+        }
+      }),
+    ),
   addPlayer: (teamId: string, data: AddPlayerRequest) =>
     apiClient.post<any>(`/teams/${teamId}/roster`, data).then((r) => r.data),
   archivePlayer: (teamId: string, memberId: string) =>

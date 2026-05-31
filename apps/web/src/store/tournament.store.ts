@@ -17,12 +17,12 @@ interface TournamentSearchState {
   sortBy: SortBy
   sortOrder: 'asc' | 'desc'
   viewMode: 'list' | 'map'
-  searchLocation: { lat: number; lng: number; label: string } | null
+  searchLocation: { lat: number; lng: number; label: string; zip?: string } | null
   setFilters: (filters: Partial<TournamentFilters>) => void
   resetFilters: () => void
   setSort: (sortBy: SortBy, sortOrder?: 'asc' | 'desc') => void
   setViewMode: (mode: 'list' | 'map') => void
-  setSearchLocation: (loc: { lat: number; lng: number; label: string } | null) => void
+  setSearchLocation: (loc: { lat: number; lng: number; label: string; zip?: string } | null) => void
 }
 
 const DEFAULT_FILTERS: TournamentFilters = {

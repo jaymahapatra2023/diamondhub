@@ -5,7 +5,7 @@ import type { PlayerResponse } from '@diamondhub/contracts'
 // ── Avatar ─────────────────────────────────────────────────────────────────────
 
 function Avatar({ firstName, lastName }: { firstName: string; lastName: string }) {
-  const initials = `${firstName[0] ?? ''}${lastName[0] ?? ''}`.toUpperCase()
+  const initials = `${firstName?.[0] ?? ''}${lastName?.[0] ?? ''}`.toUpperCase()
   return (
     <div
       className="h-10 w-10 rounded-full bg-blue-800 flex items-center justify-center text-sm font-bold text-blue-100 flex-shrink-0"
