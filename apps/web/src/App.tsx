@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router'
 import { useAuthStore } from './store/auth.store.js'
 import { LoadingScreen } from './components/ui/LoadingScreen.js'
 import { AppShell } from './components/layout/AppShell.js'
+import { PublicShell } from './components/layout/PublicShell.js'
 import { LoginPage } from './pages/auth/LoginPage.js'
 import { RegisterPage } from './pages/auth/RegisterPage.js'
 import { OnboardingPage } from './pages/auth/OnboardingPage.js'
@@ -83,9 +84,11 @@ export default function App() {
 
   return (
     <Routes>
-      {/* E6: Public tournament browse — no auth required */}
-      <Route path="/browse" element={<TournamentsPage />} />
-      <Route path="/browse/:id" element={<TournamentDetailPage />} />
+      {/* E6: Public tournament browse — no auth required, wrapped in public chrome */}
+      <Route element={<PublicShell />}>
+        <Route path="/browse" element={<TournamentsPage />} />
+        <Route path="/browse/:id" element={<TournamentDetailPage />} />
+      </Route>
 
       {/* E6-S3: Public live score view — no auth required (E9 will wire WebSocket) */}
       <Route path="/live/:gameId" element={<LiveScorePage />} />
